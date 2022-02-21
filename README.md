@@ -34,7 +34,7 @@ The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name     | Function | Local IP Address | Public IP Address | Operating System |
-|----------|----------|------------|------------------|
+|----------|----------|------------|----------------|------------------|
 | Jump-Box-Provisioner | Gateway  | 10.0.0.4 | 20.211.168.169  | Linux (ubuntu 20.04)           |
 | Web-1     | DVWA Container Host         | 10.0.0.5 | N/A          | Linux (ubuntu 20.04)                 |
 | Web-2     | DVWA Container Host         | 10.0.0.6 | N/A          | Linux (ubuntu 20.04)                 |
