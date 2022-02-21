@@ -33,12 +33,12 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-| Name     | Function | IP Address | Operating System |
+| Name     | Function | Local IP Address | Public IP Address | Operating System |
 |----------|----------|------------|------------------|
-| Jump-Box-Provisioner | Gateway  | 10.0.0.4   | Linux (ubuntu 20.04)           |
-| Web-1     | DVWA Container Host         | 10.0.0.5           | Linux (ubuntu 20.04)                 |
-| Web-2     | DVWA Container Host         | 10.0.0.6           | Linux (ubuntu 20.04)                 |
-| ELK-VM     | ELK Stack Server         | 10.1.0.4           | Linux (ubuntu 20.04)                 |
+| Jump-Box-Provisioner | Gateway  | 10.0.0.4 | 20.211.168.169  | Linux (ubuntu 20.04)           |
+| Web-1     | DVWA Container Host         | 10.0.0.5 | N/A          | Linux (ubuntu 20.04)                 |
+| Web-2     | DVWA Container Host         | 10.0.0.6 | N/A          | Linux (ubuntu 20.04)                 |
+| ELK-VM     | ELK Stack Server         | 10.1.0.4 | 40.127.93.150          | Linux (ubuntu 20.04)                 |
 
 ### Access Policies
 
