@@ -36,7 +36,7 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
 | Jump-Box-Provisioner | Gateway  | 10.0.0.4   | Linux (ubuntu 20.04)           |
-| TODO     |          |            |                  |
+| Web-1     | DVWA Container Host         | 10.0.0.5           | Linux (ubuntu 20.04)                 |
 | TODO     |          |            |                  |
 | TODO     |          |            |                  |
 
