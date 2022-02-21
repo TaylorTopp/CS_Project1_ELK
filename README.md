@@ -37,8 +37,8 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 |----------|----------|------------|------------------|
 | Jump-Box-Provisioner | Gateway  | 10.0.0.4   | Linux (ubuntu 20.04)           |
 | Web-1     | DVWA Container Host         | 10.0.0.5           | Linux (ubuntu 20.04)                 |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
+| Web-2     | DVWA Container Host         | 10.0.0.6           | Linux (ubuntu 20.04)                 |
+| ELK-VM     | ELK Stack Server         | 10.1.0.4           | Linux (ubuntu 20.04)                 |
 
 ### Access Policies
 
