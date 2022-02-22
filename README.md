@@ -81,17 +81,9 @@ These Beats allow us to collect the following information from each machine:
 - Filebeat monitors and collects logs for files and locations specified on the target machine. This will help track any changes to files in these systems.
 - Metricbeat collects data from the operating system and services running on the target machine. Metricbeat will help monitor the health of the machines and determine and issues with their performance.
 
-### Using the Playbook
-In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
+### Configuring Filebeat & Metricbeat
 
-SSH into the control node and follow the steps below:
-- Copy the elk-install.yml file to /etc/ansible.
-- Update the playbook file to include the correct hosts that you wish to target. You may need to specify the hosts in the ansible.cfg file.
-- Run the playbook by using `ansible-playbook elk-install.yml`, and navigate to the target via SSH to check that the installation worked as expected. You will then need to run `sudo docker ps` as above to ensure the container is running.
-- You can then navigate to the public IP of the ELK-VM at http://your-IP:5601/app/kibana#/home?_g=() to ensure that Kibana is running. You will also need to ensure you network security group is correctly configured to allow traffic on port 5601 to the ELK-VM from your local machine.
-- See playbook used for this install [here](https://github.com/TaylorTopp/CS_Project1_ELK/blob/main/Ansible/elk-install.yml)
-
-###Configuring Filebeat & Metricbeat
+Note it is essential to download and install configuration playbooks for Filebeat & Metricbeat to ensure the elk-install.yml playbook works.
 
 For the metricbeat and filebeat portions you will also need to do the following:
 - Type the following commands for filebeat and metricbeat respectively:
@@ -110,3 +102,13 @@ Filebeat status confirmation:
 
 Metricbeat status confirmation:
 ![metricbeat status](https://github.com/TaylorTopp/CS_Project1_ELK/blob/main/Diagrams/Metricbeat_OK.PNG)
+
+### Using the Playbook
+In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
+
+SSH into the control node and follow the steps below:
+- Copy the elk-install.yml file to /etc/ansible.
+- Update the playbook file to include the correct hosts that you wish to target. You may need to specify the hosts in the ansible.cfg file.
+- Run the playbook by using `ansible-playbook elk-install.yml`, and navigate to the target via SSH to check that the installation worked as expected. You will then need to run `sudo docker ps` as above to ensure the container is running.
+- You can then navigate to the public IP of the ELK-VM at http://your-IP:5601/app/kibana#/home?_g=() to ensure that Kibana is running. You will also need to ensure you network security group is correctly configured to allow traffic on port 5601 to the ELK-VM from your local machine.
+- See playbook used for this install [here](https://github.com/TaylorTopp/CS_Project1_ELK/blob/main/Ansible/elk-install.yml)
