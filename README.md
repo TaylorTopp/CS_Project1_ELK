@@ -91,6 +91,8 @@ SSH into the control node and follow the steps below:
 - You can then navigate to the public IP of the ELK-VM at http://your-IP:5601/app/kibana#/home?_g=() to ensure that Kibana is running. You will also need to ensure you network security group is correctly configured to allow traffic on port 5601 to the ELK-VM from your local machine.
 - See playbook used for this install [here](https://github.com/TaylorTopp/CS_Project1_ELK/blob/main/Ansible/elk-install.yml)
 
+#Configuring Filebeat & Metricbeat
+
 For the metricbeat and filebeat portions you will also need to do the following:
 - Type the following commands for filebeat and metricbeat respectively:
   - `curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat > /etc/ansible/filebeat-config.yml`
