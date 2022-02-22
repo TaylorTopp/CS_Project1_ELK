@@ -165,34 +165,35 @@ SSH into the control node and follow the steps below:
       systemd:
        name: filebeat
        enabled: True
-- name: Configure metricbeat
-  hosts: webservers
-  become: true
-  tasks:
+  
+    - name: Configure metricbeat
+      hosts: webservers
+      become: true
+      tasks:
 
-    - name: Download .deb file
-      get_url:
-       url: https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.4.0-amd64.deb
-       dest: /etc
+       - name: Download .deb file
+         get_url:
+          url: https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.4.0-amd64.deb
+          dest: /etc
 
-    - name: Install metricbeat
-      command: dpkg -i /etc/metricbeat-7.4.0-amd64.deb
+       - name: Install metricbeat
+          command: dpkg -i /etc/metricbeat-7.4.0-amd64.deb
 
-    - name: copy config file
-      copy:
-       src: /etc/ansible/metricbeat-config.yml
-       dest: /etc/metricbeat/metricbeat.yml
+       - name: copy config file
+         copy:
+           src: /etc/ansible/metricbeat-config.yml
+           dest: /etc/metricbeat/metricbeat.yml
 
-    - name: enable metricbeat
-      command: metricbeat modules enable docker
+       - name: enable metricbeat
+         command: metricbeat modules enable docker
 
-    - name: metricbeat setup
-      command: metricbeat setup
+       - name: metricbeat setup
+         command: metricbeat setup
 
-    - name: Enable service metricbeat on boot
-      systemd:
-       name: metricbeat
-       enabled: True
+       - name: Enable service metricbeat on boot
+         systemd:
+           name: metricbeat
+           enabled: True
 ```
 </details>
 
