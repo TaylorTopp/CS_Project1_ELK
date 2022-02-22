@@ -1,0 +1,40 @@
+---
+- name: ELK Installer
+  hosts: elk
+  remote_user: ELKUser
+  become: true
+  tasks:
+
+  - sysctl:
+      name: vm.max_map_count
+      value: 262144
+      state: present
+  - name: increase vm on startup
+    command: echo "vm.max_map_count" >> /etc/sysctl.conf
+  - name: docker.io install
+    apt:
+     update_cache: yes
+     name: docker.io
+     state: present
+  - name: python3
+    apt:
+     name: python3-pip
+     state: present
+  - name: docker
+    pip:
+     name: docker
+     state: present  
+  - name: install elk docker container
+    docker_container:
+     name: ELK
+     image: sebp/elk:761
+     state: started
+     restart_policy: always
+     published_ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+  - name: Enable service docker on boot
+    systemd:
+     name: docker
+     enabled: True
