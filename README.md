@@ -51,6 +51,7 @@ A summary of the access policies in place can be found in the table below.
 | Web-1         | No                    | 10.0.0.4                     | 115.128.11.95 |
 | Web-2         | No                    | 10.0.0.4                     | 115.128.11.95 |
 | ELK-VM        | No                    | 10.0.0.4                     | 115.128.11.95 |
+
 *Note the public IP address can only access the docker image being hosted on the VM, for Web-1 & Web-2 this is DVWA, for ELK-VM this is Kibana
 
 ### Elk Configuration
