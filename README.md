@@ -112,3 +112,110 @@ SSH into the control node and follow the steps below:
 - Run the playbook by using `ansible-playbook elk-install.yml`, and navigate to the target via SSH to check that the installation worked as expected. You will then need to run `sudo docker ps` as above to ensure the container is running.
 - You can then navigate to the public IP of the ELK-VM at http://your-IP:5601/app/kibana#/home?_g=() to ensure that Kibana is running. You will also need to ensure you network security group is correctly configured to allow traffic on port 5601 to the ELK-VM from your local machine.
 - See playbook used for this install [here](https://github.com/TaylorTopp/CS_Project1_ELK/blob/main/Ansible/elk-install.yml)
+
+<details>
+  <summary>Or you can view it here!</summary>
+  
+  ```
+    ---
+- name: ELK Installer
+  hosts: elk
+  remote_user: ELKUser
+  become: true
+  tasks:
+
+  - sysctl:
+      name: vm.max_map_count
+      value: 262144
+      state: present
+  - name: increase vm on startup
+    command: echo "vm.max_map_count" >> /etc/sysctl.conf
+  - name: docker.io install
+    apt:
+     update_cache: yes
+     name: docker.io
+     state: present
+  - name: python3
+    apt:
+     name: python3-pip
+     state: present
+  - name: docker
+    pip:
+     name: docker
+     state: present  
+  - name: install elk docker container
+    docker_container:
+     name: ELK
+     image: sebp/elk:761
+     state: started
+     restart_policy: always
+     published_ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+  - name: Enable service docker on boot
+    systemd:
+     name: docker
+     enabled: True
+
+- name: Configure filebeat
+  hosts: webservers
+  become: true
+  tasks:
+
+    - name: Download .deb file
+      get_url:
+       url: https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb
+       dest: /etc
+
+    - name: Install filebeat
+      command: dpkg -i /etc/filebeat-7.4.0-amd64.deb
+
+    - name: copy config file
+      copy:
+       src: /etc/ansible/filebeat-config.yml
+       dest: /etc/filebeat/filebeat.yml
+
+    - name: enable filebeat
+      command: filebeat modules enable system
+
+    - name: filebeat setup
+      command: filebeat setup
+
+    - name: start filebeat
+      command: service filebeat start
+
+    - name: Enable service filebeat on boot
+      systemd:
+       name: filebeat
+       enabled: True
+- name: Configure metricbeat
+  hosts: webservers
+  become: true
+  tasks:
+
+    - name: Download .deb file
+      get_url:
+       url: https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.4.0-amd64.deb
+       dest: /etc
+
+    - name: Install metricbeat
+      command: dpkg -i /etc/metricbeat-7.4.0-amd64.deb
+
+    - name: copy config file
+      copy:
+       src: /etc/ansible/metricbeat-config.yml
+       dest: /etc/metricbeat/metricbeat.yml
+
+    - name: enable metricbeat
+      command: metricbeat modules enable docker
+
+    - name: metricbeat setup
+      command: metricbeat setup
+
+    - name: Enable service metricbeat on boot
+      systemd:
+       name: metricbeat
+       enabled: True
+  ```
+</details>
