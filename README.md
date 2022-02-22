@@ -92,7 +92,6 @@ SSH into the control node and follow the steps below:
 - See playbook used for this install ![here](https://github.com/TaylorTopp/CS_Project1_ELK/blob/main/Ansible/elk-install.yml) or the below section.
 - <details><summary>YAML playbook for ELK Install</summary>
   ```
-  
      ---
      - name: ELK Installer
        hosts: elk
