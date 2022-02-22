@@ -93,83 +93,88 @@ SSH into the control node and follow the steps below:
 - <details>
   <summary>YAML playbook for ELK Install</summary>
     ```
-    ---
-    - name: ELK Installer
-      hosts: elk
-      remote_user: ELKUser
-      become: true
-      tasks:
+     ---
+     - name: ELK Installer
+       hosts: elk
+       remote_user: ELKUser
+       become: true
+       tasks:
 
-      - sysctl:
-          name: vm.max_map_count
-          value: 262144
-          state: present
-      - name: increase vm on startup
-        command: echo "vm.max_map_count" >> /etc/sysctl.conf
-      - name: docker.io install
-        apt:
-        update_cache: yes
-         name: docker.io
-         state: present
-      - name: python3
-        apt:
-         name: python3-pip
-         state: present
-      - name: docker
-        pip:
-         name: docker
-         state: present  
-      - name: install elk docker container
-        docker_container:
-         name: ELK
-         image: sebp/elk:761
-         state: started
-         restart_policy: always
-         published_ports:
-          - "5601:5601"
-          - "9200:9200"
-          - "5044:5044"
-      - name: Enable service docker on boot
-        systemd:
-         name: docker
-         enabled: True
-
-- name: Configure filebeat
-  hosts: webservers
-  become: true
-  tasks:
-
-    - name: Download .deb file
-      get_url:
-       url: https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb
-       dest: /etc
-
-    - name: Install filebeat
-      command: dpkg -i /etc/filebeat-7.4.0-amd64.deb
-
-    - name: copy config file
-      copy:
-       src: /etc/ansible/filebeat-config.yml
-       dest: /etc/filebeat/filebeat.yml
-
-    - name: enable filebeat
-      command: filebeat modules enable system
-
-    - name: filebeat setup
-      command: filebeat setup
-
-    - name: start filebeat
-      command: service filebeat start
-
-    - name: Enable service filebeat on boot
-      systemd:
-       name: filebeat
-       enabled: True
+       - sysctl:
+           name: vm.max_map_count
+           value: 262144
+           state: present
+       - name: increase vm on startup
+         command: echo "vm.max_map_count" >> /etc/sysctl.conf
   
-    - name: Configure metricbeat
-      hosts: webservers
-      become: true
-      tasks:
+       - name: docker.io install
+         apt:
+          update_cache: yes
+          name: docker.io
+          state: present
+  
+       - name: python3
+         apt:
+          name: python3-pip
+          state: present
+  
+       - name: docker
+         pip:
+          name: docker
+          state: present  
+  
+       - name: install elk docker container
+         docker_container:
+          name: ELK
+          image: sebp/elk:761
+          state: started
+          restart_policy: always
+          published_ports:
+           - "5601:5601"
+           - "9200:9200"
+           - "5044:5044"
+  
+       - name: Enable service docker on boot
+         systemd:
+          name: docker
+          enabled: True
+
+     - name: Configure filebeat
+       hosts: webservers
+       become: true
+       tasks:
+
+       - name: Download .deb file
+         get_url:
+          url: https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb
+          dest: /etc
+
+       - name: Install filebeat
+         command: dpkg -i /etc/filebeat-7.4.0-amd64.deb
+
+       - name: copy config file
+         copy:
+          src: /etc/ansible/filebeat-config.yml
+          dest: /etc/filebeat/filebeat.yml
+
+       - name: enable filebeat
+         command: filebeat modules enable system
+
+       - name: filebeat setup
+         command: filebeat setup
+
+       - name: start filebeat
+         command: service filebeat start
+
+       - name: Enable service filebeat on boot
+         systemd:
+         name: filebeat
+         enabled: True
+  
+     - name: Configure metricbeat
+       hosts: webservers
+       become: true
+       tasks:
 
        - name: Download .deb file
          get_url:
