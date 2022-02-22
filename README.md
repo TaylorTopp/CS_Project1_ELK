@@ -138,8 +138,7 @@ SSH into the control node and follow the steps below:
          systemd:
           name: docker
           enabled: True
-  ```
-  ```
+
      - name: Configure filebeat
        hosts: webservers
        become: true
