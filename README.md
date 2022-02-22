@@ -90,9 +90,8 @@ SSH into the control node and follow the steps below:
 - Update the _____ file to include...
 - Run the playbook, and navigate to ____ to check that the installation worked as expected.
 - See playbook used for this install ![here](https://github.com/TaylorTopp/CS_Project1_ELK/blob/main/Ansible/elk-install.yml) or the below section.
-- <details>
-  <summary>YAML playbook for ELK Install</summary>
-    ```
+- <details><summary>YAML playbook for ELK Install</summary>
+  ```
      ---
      - name: ELK Installer
        hosts: elk
@@ -199,8 +198,8 @@ SSH into the control node and follow the steps below:
          systemd:
            name: metricbeat
            enabled: True
-```
-</details>
+  ```
+  </details>
 
 _TODO: Answer the following questions to fill in the blanks:_
 - _Which file is the playbook? Where do you copy it?_
