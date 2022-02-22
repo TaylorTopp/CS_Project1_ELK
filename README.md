@@ -8,8 +8,6 @@ The files in this repository were used to configure the network depicted below.
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the YAML playbook file may be used to install only certain pieces of it, such as Filebeat.
 
-  - _TODO: Enter the playbook file._
-
 This document contains the following details:
 - Description of the Topologu
 - Access Policies
@@ -24,39 +22,36 @@ This document contains the following details:
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
 Load balancing ensures that the application will be highly available, in addition to restricting traffic to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the files and system logs.
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name     | Function | Local IP Address | Public IP Address | Operating System |
 |----------|----------|------------|----------------|------------------|
 | Jump-Box-Provisioner | Gateway  | 10.0.0.4 | 20.211.168.169  | Linux (ubuntu 20.04)           |
-| Web-1     | DVWA Container Host         | 10.0.0.5 | N/A          | Linux (ubuntu 20.04)                 |
-| Web-2     | DVWA Container Host         | 10.0.0.6 | N/A          | Linux (ubuntu 20.04)                 |
+| Web-1     | DVWA Container Host         | 10.0.0.5 | 20.211.31.149 (Load Balancer)          | Linux (ubuntu 20.04)                 |
+| Web-2     | DVWA Container Host         | 10.0.0.6 | 20.211.31.149 (Load Balancer)         | Linux (ubuntu 20.04)                 |
 | ELK-VM     | ELK Stack Server         | 10.1.0.4 | 40.127.93.150          | Linux (ubuntu 20.04)                 |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the Jump-Box-Provisioner machine can accept connections from the Internet. Access to this machine is only allowed from the following IP address:
+- 115.128.11.95
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+Machines within the network can only be accessed by the Jump Box machine, with IP 10.0.0.4.
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Name     | Publicly Accessible | Allowed Internal IP Addresses | Allowed Public IP Addresses* |
+|----------|---------------------|----------------------|-------------------|
+| Jump-Box-Provisioner | Yes          | N/A    | 115.128.11.95    |
+| Web-1         | No                    | 10.0.0.4                     | 115.128.11.95 |
+| Web-2         | No                    | 10.0.0.4                     | 115.128.11.95 |
+| ELK-VM        | No                    | 10.0.0.4                     | 115.128.11.95 |
+*Note the public IP address can only access the docker image being hosted on the VM, for Web-1 & Web-2 this is DVWA, for ELK-VM this is Kibana
 
 ### Elk Configuration
 
