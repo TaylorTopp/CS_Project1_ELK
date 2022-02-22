@@ -76,6 +76,7 @@
       systemd:
        name: filebeat
        enabled: True
+       
 - name: Configure metricbeat
   hosts: webservers
   become: true
