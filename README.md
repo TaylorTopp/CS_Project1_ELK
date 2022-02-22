@@ -90,6 +90,7 @@ SSH into the control node and follow the steps below:
 - Update the _____ file to include...
 - Run the playbook, and navigate to ____ to check that the installation worked as expected.
 - See playbook used for this install ![here](https://github.com/TaylorTopp/CS_Project1_ELK/blob/main/Ansible/elk-install.yml) or the below section.
+- <script src="https://gist.github.com/TaylorTopp/7b7d450dedf2a9b9fb9548c7416a5195.js"></script>
 - <details><summary>YAML playbook for ELK Install</summary>
   ```
      ---
