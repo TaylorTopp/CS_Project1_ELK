@@ -54,6 +54,20 @@ A summary of the access policies in place can be found in the table below.
 
 **Note the public IP address can only access the docker image being hosted on the VM, for Web-1 & Web-2 this is DVWA, for ELK-VM this is Kibana*
 
+### DVWA Setup and Configuration
+
+For future pentesting capabilities and public facing access to select machine, a DVWA docker image was set up on both of the Web VM's.
+
+This was done using another ansible playbook which can be found [here](linktba).
+
+This playbook does the following on the targetted webservers:
+- Install docker & docker.io
+- Install python3
+- Download and install the DVWA docker container and allow port 80
+- Ensure docker image runs on startup
+
+To run this playbook simply use `ansible-playbook dvwa_playbook.yml`
+
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because it allows docker images to be redeployed to the machines instantly. This means minor changes can be made to the playbook file and distributed with a single command.
