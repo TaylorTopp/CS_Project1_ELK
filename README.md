@@ -58,7 +58,7 @@ A summary of the access policies in place can be found in the table below.
 
 For future pentesting capabilities and public facing access to select machine, a DVWA docker image was set up on both of the Web VM's.
 
-This was done using another ansible playbook which can be found [here](linktba).
+This was done using another ansible playbook which can be found [here](https://github.com/TaylorTopp/CS_Project1_ELK/blob/main/Ansible/dvwa_playbook.yml).
 
 This playbook does the following on the targetted webservers:
 - Install docker & docker.io
