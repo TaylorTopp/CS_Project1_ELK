@@ -83,7 +83,7 @@ These Beats allow us to collect the following information from each machine:
 
 ### Configuring Filebeat & Metricbeat
 
-Note it is essential to download and install configuration playbooks for Filebeat & Metricbeat to ensure the elk-install.yml playbook works.
+Note it is essential to download and install configuration playbooks for Filebeat & Metricbeat to ensure the elk-install.yml playbook works as this playbook is a full ansible configuration for installation of ELK stack on the ELK-VM, and Filebeat & Metricbeat on the Web VM's.
 
 For the metricbeat and filebeat portions you will also need to do the following:
 - Type the following commands for filebeat and metricbeat respectively:
