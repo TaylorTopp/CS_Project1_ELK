@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+sys > ~/research/sys_info.txt

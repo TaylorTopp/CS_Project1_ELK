@@ -1,0 +1,45 @@
+#!/bin/bash
+
+#defining variables
+OUT=$HOME/research/sys_info.txt
+IP6=$(ip addr | grep inet | tail -2 | head -1)
+PERM=$(find /home -type f -perm 777 2> /dev/null)
+date=$(date)
+uname=$(uname -a)
+IP4=$(hostname -I | awk '{print $1}')
+hname=$(hostname)
+
+#prevents program from being run with sudo
+if [ $UID -eq 0 ]
+  then
+        echo "Do not run this script with sudo"
+        exit
+fi
+
+#checks for existence of research directory, makes it if it doesnt exist
+if [ -d $HOME/research ]
+  then
+        echo "Research exists"
+  else
+        mkdir $HOME/research
+fi
+
+#checks for sys_info.txt, deletes if exists
+if [ -f $OUT ]
+  then 
+        rm  $OUT
+        echo "sys_info.txt deleted"
+  else 
+        echo "sys_info.txt does not exist"
+  fi
+
+echo -e "Todays date is: $date" >> $OUT
+echo -e "\nThe uname is:\n$uname" >> $OUT
+echo -e "\nThis machines IP address is:\n$IP4\n&\n$IP6" >> $OUT
+echo -e "\nThis machines hostname is: $hname \n" >> $OUT
+echo -e "Memory info as below: \n $(free -m)" >> $OUT
+echo -e "\nDNS servers as below: \n $(grep "nameserver" /etc/resolv.conf)" >> $OUT
+echo -e "\nCPU usage as below: \n $(mpstat)" >> $OUT
+echo -e "\nDisk usage as below: \n $(df -h)" >> $OUT
+echo -e "\nCurrently logged on users are: \n $(who)" >> $OUT
+echo "Successfully created new sys_info.txt file"
